@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Enjoy</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="login_fragment_label">Login</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello__fragment">Hello Login</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+  <string name="ok">OK</string>
+  <string name="password">Passwort</string>
+  <string name="name">Name</string>
+  <string name="logo">Logo</string>
+</resources>
