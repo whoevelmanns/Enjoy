@@ -12,17 +12,17 @@
             tools:layout="@layout/fragment_login">
 
         <action
-                android:id="@+id/action_LoginFragment_to_SecondFragment"
-                app:destination="@id/SecondFragment"/>
+                android:id="@+id/action_LoginFragment_to_VotingFragment"
+                app:destination="@id/VotingFragment"/>
     </fragment>
     <fragment
-            android:id="@+id/SecondFragment"
-            android:name="de.whwk.enjoy.SecondFragment"
-            android:label="@string/second_fragment_label"
-            tools:layout="@layout/fragment_second">
+            android:id="@+id/VotingFragment"
+            android:name="de.whwk.enjoy.VotingFragment"
+            android:label="@string/voting_fragment_label"
+            tools:layout="@layout/fragment_voting">
 
         <action
-                android:id="@+id/action_SecondFragment_to_LoginFragment"
+                android:id="@+id/action_VotingFragment_to_LoginFragment"
                 app:destination="@id/LoginFragment"/>
     </fragment>
 </navigation>
