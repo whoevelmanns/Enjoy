@@ -22,9 +22,9 @@ import org.json.JSONObject;
 import java.nio.charset.StandardCharsets;
 
 public class LoginFragment extends Fragment {
-
+  private final String TAG = this.getClass().getName();
   private FragmentLoginBinding binding;
-  private static final String TAG = EnjoyActivity.class.getName();
+
   @Override
   public View onCreateView(
           @NonNull LayoutInflater inflater, ViewGroup container,
@@ -62,7 +62,7 @@ public class LoginFragment extends Fragment {
       Log.i(TAG, response);
       try {
         JSONObject jsonObject = new JSONObject(response);
-        ((EnjoyActivity)requireActivity()).setUser(jsonObject);
+        ((EnjoyActivity) requireActivity()).setUser(jsonObject);
         Log.i(TAG, "Anmeldung erfolgt");
         NavHostFragment.findNavController(LoginFragment.this)
                 .navigate(R.id.action_LoginFragment_to_VotingFragment);
@@ -77,7 +77,7 @@ public class LoginFragment extends Fragment {
 
       @RequiresApi(api = Build.VERSION_CODES.KITKAT)
       @Override
-      public byte[] getBody()  {
+      public byte[] getBody() {
         if (jsonBody == null)
           return null;
         return jsonBody.toString().getBytes(StandardCharsets.UTF_8);
