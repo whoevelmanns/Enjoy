@@ -10,7 +10,7 @@ public class VoteModel {
     this.vote=vote;
   }
 
-  public String getEvent() {
+  public String getTitel() {
     try {
       return vote.getString("titel");
     } catch (JSONException e) {
@@ -21,10 +21,40 @@ public class VoteModel {
 
   public String getDate() {
     try {
-      return vote.getString("startDate");
+      String startDate = "" + vote.getString("startDate");
+      String endDate = "" + vote.getString("endDate");
+      String startTime = "" + vote.getString("startTime");
+      String endTime = ""+ vote.getString("endTime");
+      String ret = startDate +" "+ startTime;
+      if (!startDate.equals(endDate) || !startTime.equals(endTime)) {
+        ret +=" - ";
+        if (!startDate.equals(endDate)){
+          ret+=endDate + " ";
+        }
+        ret += endTime;
+      }
+      return ret;
     } catch (JSONException e) {
       e.printStackTrace();
       return "?Date";
+    }
+  }
+
+  public Integer getStatus() {
+    try {
+      return vote.getInt("status");
+    } catch (JSONException e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
+  public Integer getEventId() {
+    try {
+      return vote.getInt("event_id");
+    } catch (JSONException e) {
+      e.printStackTrace();
+      return null;
     }
   }
 }

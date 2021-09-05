@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import com.android.volley.Request;
@@ -52,7 +53,7 @@ public class VotingFragment extends Fragment {
           JSONObject vote = votes.getJSONObject(i);
           list.add(new VoteModel(vote));
         }
-        VoteAdapter adapter = new VoteAdapter(requireView().getContext(), list);
+        VoteAdapter adapter = new VoteAdapter(this,requireView().getContext(), list);
         ListView listView = requireView().findViewById(R.id.listview_voting);
         listView.setAdapter(adapter);
       } catch (JSONException e) {
@@ -79,5 +80,9 @@ public class VotingFragment extends Fragment {
   public void onDestroyView() {
     super.onDestroyView();
     binding = null;
+  }
+
+  public void vote(Integer event_id, int status) {
+    Toast.makeText(getView().getContext(),"Vote "+event_id + "=>" + status,Toast.LENGTH_SHORT).show();
   }
 }
