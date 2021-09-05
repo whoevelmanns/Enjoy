@@ -1,21 +1,25 @@
-package de.whwk.enjoy;
+package de.whwk.enjoy.vote;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import de.whwk.enjoy.EnjoyActivity;
+import de.whwk.enjoy.R;
 import de.whwk.enjoy.databinding.FragmentVotingBinding;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,17 +38,23 @@ public class VotingFragment extends Fragment {
 
   public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    binding.buttonVoting.setOnClickListener(view1 -> NavHostFragment.findNavController(VotingFragment.this)
-            .navigate(R.id.action_VotingFragment_to_LoginFragment));
-    getVotings("https://www.enjoy-gospel.de/wp-json/tribe/events/v1/events", ((EnjoyActivity) requireActivity()).getUser());
+    getVotings(((EnjoyActivity) requireActivity()).getUser());
   }
 
-  private void getVotings(String url, JSONObject user) {
+  private void getVotings(JSONObject user) {
     RequestQueue mRequestQueue = Volley.newRequestQueue(requireActivity().getApplicationContext());
-    StringRequest stringRequest = new StringRequest(Request.Method.GET, url, response -> {
+    StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://www.enjoy-gospel.de/wp-json/enjoy/v1/votes/user", response -> {
       try {
-        JSONObject events = new JSONObject(response);
-        Log.i(TAG, events.getJSONArray("events").get(0).toString());
+        JSONArray votes = new JSONArray(response);
+        Log.i(TAG, votes.toString());
+        ArrayList<VoteModel> list = new ArrayList<>();
+        for (int i = 0; i < votes.length(); i++) {
+          JSONObject vote = votes.getJSONObject(i);
+          list.add(new VoteModel(vote));
+        }
+        VoteAdapter adapter = new VoteAdapter(requireView().getContext(), list);
+        ListView listView = requireView().findViewById(R.id.listview_voting);
+        listView.setAdapter(adapter);
       } catch (JSONException e) {
         e.printStackTrace();
       }
@@ -55,7 +65,7 @@ public class VotingFragment extends Fragment {
         try {
           headers.put("Content-Type", "application/json; charset=UTF-8");
           headers.put("Authorization", "Bearer " + user.getString("token"));
-          Log.i(TAG, headers.toString());
+          Log.d(TAG, headers.toString());
         } catch (JSONException e) {
           Log.e(TAG, e.toString());
         }

@@ -1,4 +1,4 @@
-package de.whwk.enjoy;
+package de.whwk.enjoy.login;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +15,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import de.whwk.enjoy.EnjoyActivity;
+import de.whwk.enjoy.R;
 import de.whwk.enjoy.databinding.FragmentLoginBinding;
 import org.json.JSONException;
 import org.json.JSONObject;

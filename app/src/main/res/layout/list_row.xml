@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_height="match_parent"
+              android:layout_width="match_parent"
+              android:orientation="vertical">
+<LinearLayout android:layout_width="match_parent"
+              android:orientation="horizontal"
+              android:layout_height="wrap_content"
+              android:padding="10dp">
+  <LinearLayout android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+    <TextView android:text="Konzert in Oberpfaffenhofen"
+              android:id="@+id/event"
+              android:layout_width="277dp"
+              android:layout_height="25dp"
+              android:gravity="start"
+              android:textSize="16sp"
+              tools:ignore="HardcodedText"/>
+    <TextView
+            android:text="29.02.2025 19:30 - 22:00"
+            android:id="@+id/date"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:gravity="start"
+            android:textSize="16sp"
+            tools:ignore="HardcodedText"
+            android:paddingLeft="20dp"
+            android:paddingRight="0dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="0dp"/>
+  </LinearLayout>
+  <RadioGroup
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:id="@+id/status"
+          android:theme="@style/Theme.Enjoy.RadioButton">
+    <RadioButton
+            android:text="@string/yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rbtn_1"
+            android:theme="@style/Theme.Enjoy.RadioButton"/>
+    <RadioButton
+            android:text="@string/no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rbtn_0"/>
+  </RadioGroup>
+</LinearLayout>
+  <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/enjoy_orange"
+        />
+</LinearLayout>

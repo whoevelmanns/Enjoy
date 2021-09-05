@@ -9,11 +9,14 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import de.whwk.enjoy.databinding.ActivityMainBinding;
+import lombok.Getter;
+import lombok.Setter;
 import org.json.JSONObject;
 
 public class EnjoyActivity extends AppCompatActivity {
-
     private AppBarConfiguration appBarConfiguration;
+    @Getter
+    @Setter
     private JSONObject user;
 
     @Override
@@ -57,13 +60,5 @@ public class EnjoyActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
-    }
-
-    public JSONObject getUser() {
-        return user;
-    }
-
-    public void setUser(JSONObject user) {
-        this.user = user;
     }
 }

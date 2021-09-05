@@ -1,16 +1,20 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-     <style name="Theme.Enjoy" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <item name="colorPrimary">@color/enjoy_orange</item>
-        <item name="colorOnPrimary">@color/enjoy_dark</item>
-       <item name="android:statusBarColor" tools:targetApi="l">?attr/colorOnPrimary</item>
-       <item name="backgroundTint" tools:targetApi="l">?attr/colorOnPrimary</item>
-       <item name="android:textCursorDrawable" tools:targetApi="l">?attr/colorOnPrimary</item>
-       <item name="colorControlActivated">?attr/colorOnPrimary</item> // For pointer normal state and copy text state
-    </style>
-    <style name="Theme.Enjoy.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-    <style name="Theme.Enjoy.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-    <style name="Theme.Enjoy.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+  <style name="Theme.Enjoy" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <item name="colorPrimary">@color/enjoy_orange</item>
+    <item name="colorOnPrimary">@color/enjoy_dark</item>
+    <item name="android:statusBarColor" tools:targetApi="l">?attr/colorOnPrimary</item>
+    <item name="backgroundTint" tools:targetApi="l">?attr/colorOnPrimary</item>
+    <item name="android:textCursorDrawable" tools:targetApi="l">?attr/colorOnPrimary</item>
+    <item name="colorControlActivated">?attr/colorOnPrimary</item>
+    <item name="radioButtonStyle">@style/Theme.Enjoy.RadioButton</item>
+  </style>
+  <style name="Theme.Enjoy.RadioButton" parent="Theme.AppCompat.Light">
+    <item name="buttonTint">@color/enjoy_orange</item>
+  </style>
+  <style name="Theme.Enjoy.NoActionBar">
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+  </style>
+  <style name="Theme.Enjoy.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+  <style name="Theme.Enjoy.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 </resources>

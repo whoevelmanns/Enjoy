@@ -14,4 +14,6 @@
   <string name="name">Max</string>
   <string name="passwd">Max$Muster$Mann</string>
   <string name="logo">Logo</string>
+  <string name="no">Nein</string>
+  <string name="yes">Ja</string>
 </resources>

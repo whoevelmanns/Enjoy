@@ -7,7 +7,7 @@
 
     <fragment
             android:id="@+id/LoginFragment"
-            android:name="de.whwk.enjoy.LoginFragment"
+            android:name="de.whwk.enjoy.login.LoginFragment"
             android:label="@string/login_fragment_label"
             tools:layout="@layout/fragment_login">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
             android:id="@+id/VotingFragment"
-            android:name="de.whwk.enjoy.VotingFragment"
+            android:name="de.whwk.enjoy.vote.VotingFragment"
             android:label="@string/voting_fragment_label"
             tools:layout="@layout/fragment_voting">
 
