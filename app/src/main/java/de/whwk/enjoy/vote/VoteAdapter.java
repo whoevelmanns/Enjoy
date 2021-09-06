@@ -50,12 +50,12 @@ public class VoteAdapter extends BaseAdapter {
     RadioButton btn;
     btn = convertView.findViewById(R.id.rbtn_0);
     if (status != null && status.equals(0)) {
-      btn.setSelected(true);
+      btn.setChecked(true);
     }
     btn.setOnClickListener(view -> votingFragment.vote(event_id,0));
     btn = convertView.findViewById(R.id.rbtn_1);
     if (status != null && status.equals(1)) {
-      btn.setSelected(true);
+      btn.setChecked(true);
     }
     btn.setOnClickListener(view -> votingFragment.vote(event_id,1));
     return convertView;

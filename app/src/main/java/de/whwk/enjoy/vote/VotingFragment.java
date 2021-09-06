@@ -1,5 +1,6 @@
 package de.whwk.enjoy.vote;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -16,10 +18,12 @@ import com.android.volley.toolbox.Volley;
 import de.whwk.enjoy.EnjoyActivity;
 import de.whwk.enjoy.R;
 import de.whwk.enjoy.databinding.FragmentVotingBinding;
+import lombok.SneakyThrows;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -83,6 +87,41 @@ public class VotingFragment extends Fragment {
   }
 
   public void vote(Integer event_id, int status) {
-    Toast.makeText(getView().getContext(),"Vote "+event_id + "=>" + status,Toast.LENGTH_SHORT).show();
+    RequestQueue mRequestQueue = Volley.newRequestQueue(requireActivity().getApplicationContext());
+    StringRequest stringRequest = new StringRequest(Request.Method.PATCH, "https://www.enjoy-gospel.de/wp-json/enjoy/v1/vote/event/"+event_id, response -> {
+      try {
+        JSONObject vote = new JSONObject(response);
+        Log.i(TAG, vote.toString());
+        if (vote.getBoolean("changed")) {
+          Toast.makeText(requireView().getContext(),"Voting abgeschickt",Toast.LENGTH_SHORT).show();
+        }
+      } catch (JSONException e) {
+        e.printStackTrace();
+      }
+    }, error -> Log.e(TAG, error.toString())) {
+      @Override
+      public Map<String, String> getHeaders() {
+        Map<String, String> headers = new HashMap<>();
+        try {
+          JSONObject user = ((EnjoyActivity) requireActivity()).getUser();
+          headers.put("Content-Type", "application/json; charset=UTF-8");
+          headers.put("Authorization", "Bearer " + user.getString("token"));
+          Log.d(TAG, headers.toString());
+        } catch (JSONException e) {
+          Log.e(TAG, e.toString());
+        }
+        return headers;
+      }
+      @SneakyThrows
+      @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+      @Override
+      public byte[] getBody() {
+        JSONObject body = new JSONObject();
+        body.put("status",status);
+        return body.toString().getBytes(StandardCharsets.UTF_8);
+      }
+    };
+    mRequestQueue.add(stringRequest);
+
   }
 }
