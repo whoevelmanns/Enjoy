@@ -51,7 +51,7 @@ public class VotingFragment extends Fragment {
     StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://www.enjoy-gospel.de/wp-json/enjoy/v1/votes/user", response -> {
       try {
         JSONArray votes = new JSONArray(response);
-        Log.i(TAG, votes.toString());
+        Log.v(TAG, votes.toString());
         ArrayList<VoteModel> list = new ArrayList<>();
         for (int i = 0; i < votes.length(); i++) {
           JSONObject vote = votes.getJSONObject(i);
@@ -70,7 +70,7 @@ public class VotingFragment extends Fragment {
         try {
           headers.put("Content-Type", "application/json; charset=UTF-8");
           headers.put("Authorization", "Bearer " + user.getString("token"));
-          Log.d(TAG, headers.toString());
+          Log.v(TAG, headers.toString());
         } catch (JSONException e) {
           Log.e(TAG, e.toString());
         }
@@ -91,7 +91,7 @@ public class VotingFragment extends Fragment {
     StringRequest stringRequest = new StringRequest(Request.Method.PATCH, "https://www.enjoy-gospel.de/wp-json/enjoy/v1/vote/event/"+event_id, response -> {
       try {
         JSONObject vote = new JSONObject(response);
-        Log.i(TAG, vote.toString());
+        Log.v(TAG, vote.toString());
         if (vote.getBoolean("changed")) {
           Toast.makeText(requireView().getContext(),"Voting abgeschickt",Toast.LENGTH_SHORT).show();
         }
@@ -106,7 +106,7 @@ public class VotingFragment extends Fragment {
           JSONObject user = ((EnjoyActivity) requireActivity()).getUser();
           headers.put("Content-Type", "application/json; charset=UTF-8");
           headers.put("Authorization", "Bearer " + user.getString("token"));
-          Log.d(TAG, headers.toString());
+          Log.v(TAG, headers.toString());
         } catch (JSONException e) {
           Log.e(TAG, e.toString());
         }

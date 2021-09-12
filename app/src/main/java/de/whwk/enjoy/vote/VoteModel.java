@@ -1,60 +1,42 @@
 package de.whwk.enjoy.vote;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+@Getter
 public class VoteModel {
-  private final JSONObject vote;
+  private int eventId;
+  private String titel;
+  private String date;
+  @Setter
+  private Integer status;
 
   public VoteModel(JSONObject vote) {
-    this.vote=vote;
-  }
-
-  public String getTitel() {
     try {
-      return vote.getString("titel");
-    } catch (JSONException e) {
-      e.printStackTrace();
-      return "?Event";
-    }
-  }
-
-  public String getDate() {
-    try {
+      titel = vote.getString("titel");
       String startDate = "" + vote.getString("startDate");
       String endDate = "" + vote.getString("endDate");
       String startTime = "" + vote.getString("startTime");
-      String endTime = ""+ vote.getString("endTime");
-      String ret = startDate +" "+ startTime;
+      String endTime = "" + vote.getString("endTime");
+      String lDate = startDate + " " + startTime;
       if (!startDate.equals(endDate) || !startTime.equals(endTime)) {
-        ret +=" - ";
-        if (!startDate.equals(endDate)){
-          ret+=endDate + " ";
+        lDate += " - ";
+        if (!startDate.equals(endDate)) {
+          lDate += endDate + " ";
         }
-        ret += endTime;
+        lDate += endTime;
       }
-      return ret;
+      date = lDate;
+      if (!vote.isNull("status")) {
+        status = vote.getInt("status");
+      }else {
+        status=-1;
+      }
+      eventId = vote.getInt("event_id");
     } catch (JSONException e) {
       e.printStackTrace();
-      return "?Date";
-    }
-  }
-
-  public Integer getStatus() {
-    try {
-      return vote.getInt("status");
-    } catch (JSONException e) {
-      e.printStackTrace();
-      return null;
-    }
-  }
-
-  public Integer getEventId() {
-    try {
-      return vote.getInt("event_id");
-    } catch (JSONException e) {
-      e.printStackTrace();
-      return null;
     }
   }
 }

@@ -12,6 +12,8 @@ import de.whwk.enjoy.R;
 import java.util.ArrayList;
 
 public class VoteAdapter extends BaseAdapter {
+  @SuppressWarnings("unused")
+  private final String TAG = this.getClass().getName();
   Context context;
   ArrayList<VoteModel> arrayList;
   private final VotingFragment votingFragment;
@@ -42,22 +44,32 @@ public class VoteAdapter extends BaseAdapter {
     if (convertView == null) {
       convertView = LayoutInflater.from(context).inflate(R.layout.list_row, parent, false);
     }
-    VoteModel vote = arrayList.get(position);
-    ((TextView) convertView.findViewById(R.id.event)).setText(vote.getTitel());
-    ((TextView) convertView.findViewById(R.id.date)).setText(vote.getDate());
-    Integer status = vote.getStatus();
-    Integer event_id = vote.getEventId();
+    VoteModel voteModel = arrayList.get(position);
+    ((TextView) convertView.findViewById(R.id.event)).setText(voteModel.getTitel());
+    ((TextView) convertView.findViewById(R.id.date)).setText(voteModel.getDate());
+    Integer status = voteModel.getStatus();
+    Integer event_id = voteModel.getEventId();
     RadioButton btn;
     btn = convertView.findViewById(R.id.rbtn_0);
     if (status != null && status.equals(0)) {
       btn.setChecked(true);
     }
-    btn.setOnClickListener(view -> votingFragment.vote(event_id,0));
+    btn.setOnCheckedChangeListener((compoundButton, b) -> {
+      if(b){
+        voteModel.setStatus(0);
+        votingFragment.vote(event_id,0);
+      }
+    });
     btn = convertView.findViewById(R.id.rbtn_1);
     if (status != null && status.equals(1)) {
       btn.setChecked(true);
     }
-    btn.setOnClickListener(view -> votingFragment.vote(event_id,1));
+    btn.setOnCheckedChangeListener((compoundButton, b) -> {
+      if(b){
+        voteModel.setStatus(1);
+        votingFragment.vote(event_id,1);
+      }
+    });
     return convertView;
   }
 }
