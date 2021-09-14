@@ -1,5 +1,6 @@
 package de.whwk.enjoy.login;
 
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,20 +29,24 @@ public class LoginFragment extends Fragment {
   private FragmentLoginBinding binding;
 
   @Override
-  public View onCreateView(
-          @NonNull LayoutInflater inflater, ViewGroup container,
-          Bundle savedInstanceState
-  ) {
+  public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     binding = FragmentLoginBinding.inflate(inflater, container, false);
     return binding.getRoot();
   }
 
   public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
+    SharedPreferences settings= requireContext().getSharedPreferences("enjoy",0);
+    View p = view.getRootView();
+    ((EditText) p.findViewById(R.id.user)).setText(settings.getString("LOGIN",""));
+    ((EditText) p.findViewById(R.id.password)).setText(settings.getString("PASSWORD",""));
     binding.buttonOk.setOnClickListener(view1 -> {
-      View p = view1.getRootView();
       String user = ((EditText) p.findViewById(R.id.user)).getText().toString();
       String password = ((EditText) p.findViewById(R.id.password)).getText().toString();
+      SharedPreferences.Editor editor = settings.edit();
+      editor.putString("LOGIN",user);
+      editor.putString("PASSWORD",password);
+      editor.apply();
       login(user, password);
     });
   }
