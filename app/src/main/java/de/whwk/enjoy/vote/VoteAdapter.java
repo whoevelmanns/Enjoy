@@ -42,7 +42,7 @@ public class VoteAdapter extends BaseAdapter {
   @Override
   public View getView(final int position, View convertView, ViewGroup parent) {
     if (convertView == null) {
-      convertView = LayoutInflater.from(context).inflate(R.layout.list_row, parent, false);
+      convertView = LayoutInflater.from(context).inflate(R.layout.event_list_item, parent, false);
     }
     VoteModel voteModel = arrayList.get(position);
     ((TextView) convertView.findViewById(R.id.event)).setText(voteModel.getTitel());
