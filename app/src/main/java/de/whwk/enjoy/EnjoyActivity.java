@@ -3,7 +3,6 @@ package de.whwk.enjoy;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -50,7 +49,8 @@ public class EnjoyActivity extends AppCompatActivity {
 
     //noinspection SimplifiableIfStatement
     if (id == R.id.action_settings) {
-      Toast.makeText(this.getApplicationContext(),"Settings gewählt",Toast.LENGTH_SHORT).show();
+      NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+      navController.navigate(R.id.to_SettingsFragment);
       return true;
     }
     return super.onOptionsItemSelected(item);

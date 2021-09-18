@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                                      android:layout_height="match_parent"
+                                      android:layout_width="match_parent">
+  <Preference android:key="key_version"
+              android:selectable="false"
+              android:persistent="false"
+              android:title="App für den Gospelchor ENJOY"/>
+  <androidx.preference.SwitchPreference
+          android:defaultValue="false"
+          android:key="save_passwd"
+          android:summary="Das erleichtert das Anmelden"
+          android:title="Speichere Passwort"/>
+</androidx.preference.PreferenceScreen>

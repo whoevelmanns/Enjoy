@@ -8,16 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.preference.PreferenceManager;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import de.whwk.enjoy.BuildConfig;
 import de.whwk.enjoy.EnjoyActivity;
 import de.whwk.enjoy.R;
 import de.whwk.enjoy.databinding.FragmentLoginBinding;
@@ -27,6 +26,8 @@ import org.json.JSONObject;
 import java.nio.charset.StandardCharsets;
 
 public class LoginFragment extends Fragment {
+  private static final String PASSWORD = "user_password";
+  private static final String LOGIN = "user_name";
   private final String TAG = this.getClass().getName();
   private FragmentLoginBinding binding;
 
@@ -38,17 +39,21 @@ public class LoginFragment extends Fragment {
 
   public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    SharedPreferences settings= requireContext().getSharedPreferences("enjoy",0);
+    SharedPreferences settings= PreferenceManager.getDefaultSharedPreferences(requireContext());
     View p = view.getRootView();
-    Toast.makeText(requireContext(),"Version " + BuildConfig.VERSION_NAME,Toast.LENGTH_SHORT).show();
-    ((EditText) p.findViewById(R.id.user)).setText(settings.getString("LOGIN",""));
-    ((EditText) p.findViewById(R.id.password)).setText(settings.getString("PASSWORD",""));
+    ((EditText) p.findViewById(R.id.user)).setText(settings.getString(LOGIN,""));
+    ((EditText) p.findViewById(R.id.password)).setText(settings.getString(PASSWORD,""));
     binding.buttonOk.setOnClickListener(view1 -> {
       String user = ((EditText) p.findViewById(R.id.user)).getText().toString();
       String password = ((EditText) p.findViewById(R.id.password)).getText().toString();
       SharedPreferences.Editor editor = settings.edit();
-      editor.putString("LOGIN",user);
-      editor.putString("PASSWORD",password);
+      editor.putString(LOGIN,user);
+      if (settings.getBoolean("save_passwd",false)) {
+        editor.putString(PASSWORD,password);
+      }else{
+        editor.remove(PASSWORD);
+        ((EditText) p.findViewById(R.id.password)).setText(null);
+      }
       editor.apply();
       login(user, password);
     });
