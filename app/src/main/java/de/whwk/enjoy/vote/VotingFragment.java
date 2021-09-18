@@ -46,7 +46,7 @@ public class VotingFragment extends Fragment {
   public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     if (savedInstanceState == null) {
-      user=((EnjoyActivity) requireActivity()).getUser();
+      user = ((EnjoyActivity) requireActivity()).getUser();
       getVotings();
     }
   }
@@ -54,7 +54,9 @@ public class VotingFragment extends Fragment {
   @Override
   public void onSaveInstanceState(@NonNull Bundle outState) {
     super.onSaveInstanceState(outState);
-    outState.putString("user",user.toString());
+    if (user != null) {
+      outState.putString("user", user.toString());
+    }
   }
 
   @Override
@@ -62,8 +64,11 @@ public class VotingFragment extends Fragment {
     super.onViewStateRestored(savedInstanceState);
     if (savedInstanceState != null) {
       try {
-        user = new JSONObject(savedInstanceState.getString("user"));
-        getVotings();
+        String t = savedInstanceState.getString("user");
+        if (t != null) {
+          user = new JSONObject(t);
+          getVotings();
+        }
       } catch (JSONException e) {
         e.printStackTrace();
       }
