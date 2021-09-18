@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import com.android.volley.Request;
@@ -31,6 +32,7 @@ import java.util.Map;
 public class VotingFragment extends Fragment {
   private final String TAG = this.getClass().getName();
   private FragmentVotingBinding binding;
+  private JSONObject user;
 
   @Override
   public View onCreateView(
@@ -43,10 +45,32 @@ public class VotingFragment extends Fragment {
 
   public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    getVotings(((EnjoyActivity) requireActivity()).getUser());
+    if (savedInstanceState == null) {
+      user=((EnjoyActivity) requireActivity()).getUser();
+      getVotings();
+    }
   }
 
-  private void getVotings(JSONObject user) {
+  @Override
+  public void onSaveInstanceState(@NonNull Bundle outState) {
+    super.onSaveInstanceState(outState);
+    outState.putString("user",user.toString());
+  }
+
+  @Override
+  public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+    super.onViewStateRestored(savedInstanceState);
+    if (savedInstanceState != null) {
+      try {
+        user = new JSONObject(savedInstanceState.getString("user"));
+        getVotings();
+      } catch (JSONException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
+  private void getVotings() {
     RequestQueue mRequestQueue = Volley.newRequestQueue(requireActivity().getApplicationContext());
     StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://www.enjoy-gospel.de/wp-json/enjoy/v1/votes/user", response -> {
       try {
@@ -57,7 +81,7 @@ public class VotingFragment extends Fragment {
           JSONObject vote = votes.getJSONObject(i);
           list.add(new VoteModel(vote));
         }
-        VoteAdapter adapter = new VoteAdapter(this,requireView().getContext(), list);
+        VoteAdapter adapter = new VoteAdapter(this, requireView().getContext(), list);
         ListView listView = requireView().findViewById(R.id.listview_voting);
         listView.setAdapter(adapter);
       } catch (JSONException e) {
@@ -88,12 +112,12 @@ public class VotingFragment extends Fragment {
 
   public void vote(Integer event_id, int status) {
     RequestQueue mRequestQueue = Volley.newRequestQueue(requireActivity().getApplicationContext());
-    StringRequest stringRequest = new StringRequest(Request.Method.PATCH, "https://www.enjoy-gospel.de/wp-json/enjoy/v1/vote/event/"+event_id, response -> {
+    StringRequest stringRequest = new StringRequest(Request.Method.PATCH, "https://www.enjoy-gospel.de/wp-json/enjoy/v1/vote/event/" + event_id, response -> {
       try {
         JSONObject vote = new JSONObject(response);
         Log.v(TAG, vote.toString());
         if (vote.getBoolean("changed")) {
-          Toast.makeText(requireView().getContext(),"Voting abgeschickt",Toast.LENGTH_SHORT).show();
+          Toast.makeText(requireView().getContext(), "Voting abgeschickt", Toast.LENGTH_SHORT).show();
         }
       } catch (JSONException e) {
         e.printStackTrace();
@@ -112,12 +136,13 @@ public class VotingFragment extends Fragment {
         }
         return headers;
       }
+
       @SneakyThrows
       @RequiresApi(api = Build.VERSION_CODES.KITKAT)
       @Override
       public byte[] getBody() {
         JSONObject body = new JSONObject();
-        body.put("status",status);
+        body.put("status", status);
         return body.toString().getBytes(StandardCharsets.UTF_8);
       }
     };
