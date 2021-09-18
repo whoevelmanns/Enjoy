@@ -3,6 +3,7 @@ package de.whwk.enjoy;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -48,12 +49,10 @@ public class EnjoyActivity extends AppCompatActivity {
     int id = item.getItemId();
 
     //noinspection SimplifiableIfStatement
-        /* Menu ausgehängt HOW
-        if (id == R.id.action_settings) {
-            return true;
-        }
-         */
-
+    if (id == R.id.action_settings) {
+      Toast.makeText(this.getApplicationContext(),"Settings gewählt",Toast.LENGTH_SHORT).show();
+      return true;
+    }
     return super.onOptionsItemSelected(item);
   }
 

@@ -1,14 +1,10 @@
 <resources>
-    <string name="app_name">Enjoy</string>
-    <string name="action_settings">Einstellungen</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="login_fragment_label">Login</string>
-    <string name="voting_fragment_label">Voting</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_login_fragment">Hello Login</string>
-    <string name="hello_voting_fragment">Hello voting fragment. Arg: %1$s</string>
+  <string name="app_name">Enjoy</string>
+  <string name="action_settings">Einstellungen</string>
+  <string name="login_fragment_label">Login</string>
+  <string name="voting_fragment_label">Voting</string>
+  <string name="next">Next</string>
+  <string name="previous">Previous</string>
   <string name="ok">OK</string>
   <string name="password">Passwort</string>
   <string name="logo">Logo</string>

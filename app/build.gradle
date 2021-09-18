@@ -9,16 +9,17 @@ android {
 
     if (versionPropsFile.canRead()) {
         Properties versionProps = new Properties()
-        def runTasks = gradle.startParameter.taskNames
-
         versionProps.load(new FileInputStream(versionPropsFile))
-
-        def code = versionProps['VERSION_CODE'].toInteger()
-        if ('assembleRelease' in runTasks) {
-            code = code + 1
-        }
+        def runTasks = gradle.startParameter.taskNames
+        def increment = 0
+        for (String item : runTasks)
+            if ( item.contains("bundleRelease")) {
+                increment = 1
+            }
+        def code = versionProps['VERSION_CODE'].toInteger() + increment
 
         versionProps['VERSION_CODE']=code.toString()
+        versionProps['RUNTASK']=runTasks.toString()
         versionProps.store(versionPropsFile.newWriter(), null)
 
         defaultConfig {

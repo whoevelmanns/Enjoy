@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
@@ -16,6 +17,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import de.whwk.enjoy.BuildConfig;
 import de.whwk.enjoy.EnjoyActivity;
 import de.whwk.enjoy.R;
 import de.whwk.enjoy.databinding.FragmentLoginBinding;
@@ -38,6 +40,7 @@ public class LoginFragment extends Fragment {
     super.onViewCreated(view, savedInstanceState);
     SharedPreferences settings= requireContext().getSharedPreferences("enjoy",0);
     View p = view.getRootView();
+    Toast.makeText(requireContext(),"Version " + BuildConfig.VERSION_NAME,Toast.LENGTH_SHORT).show();
     ((EditText) p.findViewById(R.id.user)).setText(settings.getString("LOGIN",""));
     ((EditText) p.findViewById(R.id.password)).setText(settings.getString("PASSWORD",""));
     binding.buttonOk.setOnClickListener(view1 -> {
