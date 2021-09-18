@@ -10,6 +10,7 @@ public class VoteModel {
   private int eventId;
   private String titel;
   private String date;
+  private String location;
   @Setter
   private Integer status;
 
@@ -21,6 +22,9 @@ public class VoteModel {
       String startTime = "" + vote.getString("startTime");
       String endTime = "" + vote.getString("endTime");
       String lDate = startDate + " " + startTime;
+      if (!"null".equals(vote.getString("location"))) {
+        location =vote.getString("location")+"\n"+vote.getString("adress")+"\n"+vote.getString("zip")+ " " + vote.getString("city");
+      }
       if (!startDate.equals(endDate) || !startTime.equals(endTime)) {
         lDate += " - ";
         if (!startDate.equals(endDate)) {

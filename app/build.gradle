@@ -17,10 +17,10 @@ android {
                 increment = 1
             }
         def code = versionProps['VERSION_CODE'].toInteger() + increment
-
-        versionProps['VERSION_CODE']=code.toString()
-        versionProps['RUNTASK']=runTasks.toString()
-        versionProps.store(versionPropsFile.newWriter(), null)
+        if (increment>0) {
+            versionProps['VERSION_CODE']=code.toString()
+            versionProps.store(versionPropsFile.newWriter(), null)
+        }
 
         defaultConfig {
             applicationId "de.whwk.enjoy"

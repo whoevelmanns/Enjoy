@@ -14,9 +14,9 @@ import java.util.ArrayList;
 public class VoteAdapter extends BaseAdapter {
   @SuppressWarnings("unused")
   private final String TAG = this.getClass().getName();
+  private final VotingFragment votingFragment;
   Context context;
   ArrayList<VoteModel> arrayList;
-  private final VotingFragment votingFragment;
 
   public VoteAdapter(VotingFragment votingFragment, Context context, ArrayList<VoteModel> list) {
     this.votingFragment = votingFragment;
@@ -47,6 +47,13 @@ public class VoteAdapter extends BaseAdapter {
     VoteModel voteModel = arrayList.get(position);
     ((TextView) convertView.findViewById(R.id.event)).setText(voteModel.getTitel());
     ((TextView) convertView.findViewById(R.id.date)).setText(voteModel.getDate());
+    TextView tv = convertView.findViewById(R.id.location);
+    String t = voteModel.getLocation();
+    if (t == null) {
+      tv.setVisibility(View.GONE);
+    } else {
+      tv.setText(t);
+    }
     Integer status = voteModel.getStatus();
     Integer event_id = voteModel.getEventId();
     RadioButton btn;
@@ -55,9 +62,9 @@ public class VoteAdapter extends BaseAdapter {
       btn.setChecked(true);
     }
     btn.setOnCheckedChangeListener((compoundButton, b) -> {
-      if(b){
+      if (b) {
         voteModel.setStatus(0);
-        votingFragment.vote(event_id,0);
+        votingFragment.vote(event_id, 0);
       }
     });
     btn = convertView.findViewById(R.id.rbtn_1);
@@ -65,9 +72,9 @@ public class VoteAdapter extends BaseAdapter {
       btn.setChecked(true);
     }
     btn.setOnCheckedChangeListener((compoundButton, b) -> {
-      if(b){
+      if (b) {
         voteModel.setStatus(1);
-        votingFragment.vote(event_id,1);
+        votingFragment.vote(event_id, 1);
       }
     });
     return convertView;
