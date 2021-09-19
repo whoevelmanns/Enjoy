@@ -76,6 +76,7 @@ public class VotingFragment extends Fragment {
   }
 
   private void getVotings() {
+    if (user == null) return;
     RequestQueue mRequestQueue = Volley.newRequestQueue(requireActivity().getApplicationContext());
     StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://www.enjoy-gospel.de/wp-json/enjoy/v1/votes/user", response -> {
       try {
@@ -132,7 +133,6 @@ public class VotingFragment extends Fragment {
       public Map<String, String> getHeaders() {
         Map<String, String> headers = new HashMap<>();
         try {
-          JSONObject user = ((EnjoyActivity) requireActivity()).getUser();
           headers.put("Content-Type", "application/json; charset=UTF-8");
           headers.put("Authorization", "Bearer " + user.getString("token"));
           Log.v(TAG, headers.toString());
