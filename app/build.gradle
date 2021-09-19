@@ -28,8 +28,10 @@ android {
             targetSdkVersion 31
             versionCode code
             versionName "1.0." + code
-
             testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+            ndk{
+                debugSymbolLevel = 'FULL'
+            }
         }
     } else {
         throw new GradleException("Could not read version.properties!")
@@ -39,6 +41,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            ndk {
+                debugSymbolLevel = 'FULL'
+            }
         }
     }
     compileOptions {
