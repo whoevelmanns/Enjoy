@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.preference.PreferenceManager;
@@ -37,26 +39,59 @@ public class LoginFragment extends Fragment {
     return binding.getRoot();
   }
 
-  public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-    super.onViewCreated(view, savedInstanceState);
-    SharedPreferences settings= PreferenceManager.getDefaultSharedPreferences(requireContext());
-    View p = view.getRootView();
-    ((EditText) p.findViewById(R.id.user)).setText(settings.getString(LOGIN,""));
-    ((EditText) p.findViewById(R.id.password)).setText(settings.getString(PASSWORD,""));
+  @Override
+  public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+    super.onViewStateRestored(savedInstanceState);
+    SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(requireContext());
+    View p = requireView().getRootView();
+    ((EditText) p.findViewById(R.id.user)).setText(settings.getString(LOGIN, ""));
+    if (settings.getBoolean("save_passwd", false)) {
+      ((EditText) p.findViewById(R.id.password)).setText(settings.getString(PASSWORD, ""));
+    }else {
+      ((EditText) p.findViewById(R.id.password)).setText("");
+    }
     binding.buttonOk.setOnClickListener(view1 -> {
       String user = ((EditText) p.findViewById(R.id.user)).getText().toString();
       String password = ((EditText) p.findViewById(R.id.password)).getText().toString();
-      SharedPreferences.Editor editor = settings.edit();
-      editor.putString(LOGIN,user);
-      if (settings.getBoolean("save_passwd",false)) {
-        editor.putString(PASSWORD,password);
-      }else{
-        editor.remove(PASSWORD);
-        ((EditText) p.findViewById(R.id.password)).setText(null);
+      if (!settings.contains("save_passwd")) {
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Soll das Passwort gespeichert werden?")
+                .setMessage("Das kann in den Einstellungen jederzeit geändert werden")
+                .setPositiveButton("Ja", (dialog, which) -> {
+                  savePassword(settings, password);
+                  dialog.dismiss();
+                })
+                .setNegativeButton("Nein", (dialog, which) -> {
+                  resetPassword(settings);
+                  dialog.dismiss();
+                })
+                .show();
+
+      } else {
+        if (settings.getBoolean("save_passwd", false)) {
+          savePassword(settings, password);
+        } else {
+          resetPassword(settings);
+        }
       }
-      editor.apply();
       login(user, password);
     });
+  }
+
+  public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+  }
+
+  private void resetPassword(SharedPreferences settings) {
+    SharedPreferences.Editor editor = settings.edit();
+    editor.remove(PASSWORD);
+    editor.apply();
+  }
+
+  private void savePassword(SharedPreferences settings, String password) {
+    SharedPreferences.Editor editor = settings.edit();
+    editor.putString(PASSWORD, password);
+    editor.apply();
   }
 
   private void login(String user, String password) {
