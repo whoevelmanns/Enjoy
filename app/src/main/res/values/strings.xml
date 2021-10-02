@@ -14,4 +14,8 @@
   <string name="user_hint">Benutzername</string>
   <string name="passwd_hint">Passwort</string>
   <string name="settings_fragment_label">Einstellungen</string>
+  <string name="lostPassword">Wenn du dein Passwort vergessen hast, kannst du mit dem Passwort vergessen Button auf der
+    Homepage dir ein neues generieren. Wenn das erledigt ist, kannst du dich mit der App anmelden.
+  </string>
+  <string name="lostPasswordBtn">Passwort vergessen</string>
 </resources>

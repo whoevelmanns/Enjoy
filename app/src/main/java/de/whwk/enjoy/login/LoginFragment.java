@@ -1,6 +1,9 @@
 package de.whwk.enjoy.login;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -75,6 +79,15 @@ public class LoginFragment extends Fragment {
         }
       }
       login(user, password);
+    });
+    binding.buttonLostPasswort.setOnClickListener(view -> {
+      try {
+        Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://enjoy-gospel.de/lostpassword"));
+        startActivity(myIntent);
+      } catch (ActivityNotFoundException e) {
+        Toast.makeText(requireContext(), "Keine Anwendung gefunden, die auf https://enjoy-gospel.de/lostpassword zugreifen kann",  Toast.LENGTH_LONG).show();
+        e.printStackTrace();
+      }
     });
   }
 

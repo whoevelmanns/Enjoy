@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
@@ -25,7 +26,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -82,14 +82,24 @@ public class VotingFragment extends Fragment {
       try {
         JSONArray votes = new JSONArray(response);
         Log.v(TAG, votes.toString());
-        ArrayList<VoteModel> list = new ArrayList<>();
+        HashMap<Integer, VoteModel> map = new HashMap<>();
         for (int i = 0; i < votes.length(); i++) {
           JSONObject vote = votes.getJSONObject(i);
-          list.add(new VoteModel(vote));
+          map.put(i,new VoteModel(vote));
         }
-        VoteAdapter adapter = new VoteAdapter(this, requireView().getContext(), list);
+        VoteAdapter adapter = new VoteAdapter(this, requireView().getContext(), map);
         ListView listView = requireView().findViewById(R.id.listview_voting);
         listView.setAdapter(adapter);
+        listView.setLongClickable(true);
+        listView.setOnItemLongClickListener((adapterView, view, position, id) -> {
+          VoteModel vote = map.get(position);
+          assert vote != null;
+          NavHostFragment.findNavController(VotingFragment.this)
+                  .navigate(R.id.action_VotingFragment_to_EventFragment);
+
+          Toast.makeText(requireContext(), "long on "+ vote.getEventId(),  Toast.LENGTH_LONG).show();
+          return true;
+        });
       } catch (JSONException e) {
         e.printStackTrace();
       }

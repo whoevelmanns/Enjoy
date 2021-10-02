@@ -13,7 +13,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.json.JSONObject;
 
-public class EnjoyActivity extends AppCompatActivity {
+public class EnjoyActivity extends AppCompatActivity{
   private AppBarConfiguration appBarConfiguration;
   @Getter
   @Setter

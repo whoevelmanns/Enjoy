@@ -9,29 +9,29 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import de.whwk.enjoy.R;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class VoteAdapter extends BaseAdapter {
   @SuppressWarnings("unused")
   private final String TAG = this.getClass().getName();
   private final VotingFragment votingFragment;
   Context context;
-  ArrayList<VoteModel> arrayList;
+  HashMap<Integer, VoteModel> map;
 
-  public VoteAdapter(VotingFragment votingFragment, Context context, ArrayList<VoteModel> list) {
+  public VoteAdapter(VotingFragment votingFragment, Context context, HashMap<Integer, VoteModel> map) {
     this.votingFragment = votingFragment;
     this.context = context;
-    this.arrayList = list;
+    this.map = map;
   }
 
   @Override
   public int getCount() {
-    return arrayList.size();
+    return map.size();
   }
 
   @Override
   public Object getItem(int position) {
-    return arrayList.get(position);
+    return map.get(position);
   }
 
   @Override
@@ -44,7 +44,8 @@ public class VoteAdapter extends BaseAdapter {
     if (convertView == null) {
       convertView = LayoutInflater.from(context).inflate(R.layout.event_list_item, parent, false);
     }
-    VoteModel voteModel = arrayList.get(position);
+    VoteModel voteModel = map.get(position);
+    assert voteModel != null;
     ((TextView) convertView.findViewById(R.id.event)).setText(voteModel.getTitel());
     ((TextView) convertView.findViewById(R.id.date)).setText(voteModel.getDate());
     TextView tv = convertView.findViewById(R.id.location);
