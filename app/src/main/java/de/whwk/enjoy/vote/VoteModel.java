@@ -1,5 +1,6 @@
 package de.whwk.enjoy.vote;
 
+import de.whwk.enjoy.EnjoyActivity;
 import lombok.Getter;
 import lombok.Setter;
 import org.json.JSONException;
@@ -17,22 +18,10 @@ public class VoteModel {
   public VoteModel(JSONObject vote) {
     try {
       titel = vote.getString("titel");
-      String startDate = "" + vote.getString("startDate");
-      String endDate = "" + vote.getString("endDate");
-      String startTime = "" + vote.getString("startTime");
-      String endTime = "" + vote.getString("endTime");
-      String lDate = startDate + " " + startTime;
       if (!"null".equals(vote.getString("location"))) {
         location =vote.getString("location")+"\n"+vote.getString("adress")+"\n"+vote.getString("zip")+ " " + vote.getString("city");
       }
-      if (!startDate.equals(endDate) || !startTime.equals(endTime)) {
-        lDate += " - ";
-        if (!startDate.equals(endDate)) {
-          lDate += endDate + " ";
-        }
-        lDate += endTime;
-      }
-      date = lDate;
+      date = EnjoyActivity.getDate(vote);
       if (!vote.isNull("status")) {
         status = vote.getInt("status");
       }else {

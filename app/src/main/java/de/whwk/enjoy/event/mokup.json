@@ -1,0 +1,189 @@
+{
+  "event": {
+    "event_id": 14059,
+    "titel": "Probe",
+    "startDate": "07.10.21",
+    "startTime": "20:00",
+    "endDate": "07.10.21",
+    "endTime": "22:00",
+    "location": null,
+    "adress": "",
+    "zip": "",
+    "city": ""
+  },
+  "voting": {
+    "Sopran1": {
+      "Franca": {
+        "user_id": 171,
+        "status": null
+      },
+      "Heidi": {
+        "user_id": 23,
+        "status": null
+      },
+      "Melli": {
+        "user_id": 8,
+        "status": "1"
+      },
+      "Moni": {
+        "user_id": 162,
+        "status": "1"
+      },
+      "Trudi": {
+        "user_id": 113,
+        "status": "1"
+      },
+      "Ute": {
+        "user_id": 141,
+        "status": "1"
+      },
+      "total": 6,
+      "yes": 4,
+      "no": 0
+    },
+    "Sopran2": {
+      "Bea": {
+        "user_id": 164,
+        "status": null
+      },
+      "Brigitte B": {
+        "user_id": 87,
+        "status": null
+      },
+      "Chris": {
+        "user_id": 93,
+        "status": "1"
+      },
+      "Helga_N": {
+        "user_id": 163,
+        "status": "1"
+      },
+      "Karola": {
+        "user_id": 160,
+        "status": "1"
+      },
+      "Margit": {
+        "user_id": 169,
+        "status": null
+      },
+      "Nina": {
+        "user_id": 153,
+        "status": null
+      },
+      "Ramona": {
+        "user_id": 94,
+        "status": "1"
+      },
+      "total": 8,
+      "yes": 4,
+      "no": 0
+    },
+    "Alt": {
+      "Brigitte S": {
+        "user_id": 103,
+        "status": "1"
+      },
+      "Brigitte W": {
+        "user_id": 158,
+        "status": null
+      },
+      "Gertrud": {
+        "user_id": 12,
+        "status": "1"
+      },
+      "Heidi K": {
+        "user_id": 155,
+        "status": null
+      },
+      "Heike": {
+        "user_id": 114,
+        "status": null
+      },
+      "Ingrid": {
+        "user_id": 156,
+        "status": "1"
+      },
+      "Johanna": {
+        "user_id": 18,
+        "status": null
+      },
+      "Jutta": {
+        "user_id": 13,
+        "status": "1"
+      },
+      "Mona": {
+        "user_id": 71,
+        "status": "1"
+      },
+      "Stefanie": {
+        "user_id": 145,
+        "status": "0"
+      },
+      "Uli": {
+        "user_id": 112,
+        "status": null
+      },
+      "total": 11,
+      "yes": 5,
+      "no": 1
+    },
+    "Tenor": {
+      "Christine": {
+        "user_id": 139,
+        "status": null
+      },
+      "Doris": {
+        "user_id": 2,
+        "status": "1"
+      },
+      "Gabi": {
+        "user_id": 77,
+        "status": "1"
+      },
+      "Svenja": {
+        "user_id": 140,
+        "status": null
+      },
+      "Thomas": {
+        "user_id": 107,
+        "status": "1"
+      },
+      "total": 5,
+      "yes": 3,
+      "no": 0
+    },
+    "Bass": {
+      "David": {
+        "user_id": 165,
+        "status": null
+      },
+      "Jochen": {
+        "user_id": 116,
+        "status": "1"
+      },
+      "J\u00fcrgen": {
+        "user_id": 70,
+        "status": null
+      },
+      "Lars": {
+        "user_id": 136,
+        "status": null
+      },
+      "Ralf": {
+        "user_id": 159,
+        "status": null
+      },
+      "Robert": {
+        "user_id": 161,
+        "status": null
+      },
+      "Stefan": {
+        "user_id": 173,
+        "status": "1"
+      },
+      "total": 7,
+      "yes": 2,
+      "no": 0
+    }
+  }
+}

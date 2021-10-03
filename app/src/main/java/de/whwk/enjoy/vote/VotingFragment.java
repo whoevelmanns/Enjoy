@@ -82,24 +82,23 @@ public class VotingFragment extends Fragment {
       try {
         JSONArray votes = new JSONArray(response);
         Log.v(TAG, votes.toString());
-        HashMap<Integer, VoteModel> map = new HashMap<>();
-        for (int i = 0; i < votes.length(); i++) {
-          JSONObject vote = votes.getJSONObject(i);
-          map.put(i,new VoteModel(vote));
-        }
-        VoteAdapter adapter = new VoteAdapter(this, requireView().getContext(), map);
-        ListView listView = requireView().findViewById(R.id.listview_voting);
-        listView.setAdapter(adapter);
-        listView.setLongClickable(true);
-        listView.setOnItemLongClickListener((adapterView, view, position, id) -> {
-          VoteModel vote = map.get(position);
-          assert vote != null;
-          NavHostFragment.findNavController(VotingFragment.this)
-                  .navigate(R.id.action_VotingFragment_to_EventFragment);
-
-          Toast.makeText(requireContext(), "long on "+ vote.getEventId(),  Toast.LENGTH_LONG).show();
-          return true;
-        });
+          HashMap<Integer, VoteModel> map = new HashMap<>();
+          for (int i = 0; i < votes.length(); i++) {
+            JSONObject vote = votes.getJSONObject(i);
+            map.put(i,new VoteModel(vote));
+          }
+          VoteAdapter adapter = new VoteAdapter(this, requireView().getContext(), map);
+          ListView listView = requireView().findViewById(R.id.listview_voting);
+          listView.setAdapter(adapter);
+          listView.setLongClickable(true);
+          listView.setOnItemLongClickListener((adapterView, view, position, id) -> {
+            VoteModel vote = map.get(position);
+            assert vote != null;
+            ((EnjoyActivity) requireActivity()).setEventId(vote.getEventId());
+            NavHostFragment.findNavController(VotingFragment.this)
+                    .navigate(R.id.action_VotingFragment_to_EventFragment);
+            return true;
+          });
       } catch (JSONException e) {
         e.printStackTrace();
       }

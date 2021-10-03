@@ -12,25 +12,34 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:id="@+id/guideline"
-          app:layout_constraintGuide_begin="20dp"
+          app:layout_constraintGuide_begin="-7dp"
           android:orientation="horizontal"/>
   <TextView
-          android:text="TextView"
+          android:id="@+id/eventTitel"
+          android:textSize="20sp"
+          android:text="Event"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:id="@+id/event"
           app:layout_constraintTop_toTopOf="parent"
-          android:layout_marginTop="44dp"
+          android:layout_marginTop="16dp"
           app:layout_constraintStart_toStartOf="parent"
           android:layout_marginLeft="36dp"
-          android:layout_marginStart="36dp"/>
+          android:layout_marginStart="36dp"
+          tools:ignore="HardcodedText"/>
   <TextView
-          android:text="TextView"
+          android:id="@+id/eventDate"
+          android:textSize="20sp"
+          android:text="Datum"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:id="@+id/textView2"
-          app:layout_constraintStart_toEndOf="@+id/event"
-          android:layout_marginLeft="64dp"
-          android:layout_marginStart="64dp"
-          app:layout_constraintTop_toTopOf="@+id/event"/>
+          android:layout_marginTop="10dp"
+          app:layout_constraintTop_toBottomOf="@+id/eventTitel"
+          app:layout_constraintStart_toStartOf="@+id/eventTitel"
+          tools:ignore="HardcodedText"/>
+  <ListView
+          android:id="@+id/listview_events"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:layout_constraintTop_toBottomOf="@+id/eventDate"
+  android:layout_marginTop="10dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

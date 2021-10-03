@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_height="match_parent"
+              android:descendantFocusability="blocksDescendants"
+              android:layout_width="match_parent"
+              android:orientation="vertical">
+<LinearLayout android:layout_width="match_parent"
+              android:orientation="vertical"
+              android:layout_height="wrap_content"
+              android:paddingLeft="10dp"
+              android:paddingRight="10dp">
+  <TextView
+          android:id="@+id/voiceLabel"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Sopran1"
+          android:textSize="20sp"
+          android:layout_marginTop="10dp"
+          tools:ignore="HardcodedText"/>
+  <ProgressBar
+          android:id="@+id/voiceStatus"
+          style="?android:attr/progressBarStyleHorizontal"
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:progressDrawable="@drawable/status_progress"
+          android:layout_weight="1"
+          android:max="8"
+          android:progress="4"
+          android:secondaryProgress="4"
+  />
+</LinearLayout>
+  <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/enjoy_orange"
+        />
+</LinearLayout>
