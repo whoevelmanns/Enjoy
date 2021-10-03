@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="enjoy_dark">#FF32353f</color>
-    <color name="enjoy_orange">#ef851a</color>
-    <color name="enjoy_white">#FFFFFFFF</color>
+  <color name="enjoy_dark">#FF32353f</color>
+  <color name="enjoy_orange">#ef851a</color>
+  <color name="enjoy_white">#FFFFFFFF</color>
+  <color name="enjoy_light">#aaa</color>
 </resources>
