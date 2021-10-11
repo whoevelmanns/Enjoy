@@ -82,7 +82,6 @@ public class EventFragment extends Fragment {
           entries.add(new PieEntry(voice.getYes(),voice.getVoiceName()));
         }
         PieDataSet dataSet = new PieDataSet(entries, "Label"); // add entries to dataset
-        //dataSet.setColor(R.color.enjoy_orange);
         dataSet.addColor(Color.LTGRAY);
         dataSet.addColor(Color.RED);
         dataSet.addColor(Color.GREEN);
