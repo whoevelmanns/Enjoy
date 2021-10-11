@@ -1,7 +1,5 @@
 package de.whwk.enjoy;
 
-import android.annotation.SuppressLint;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -44,11 +42,11 @@ public class EnjoyActivity extends AppCompatActivity {
     return "Fehler in Datumsermittlung";
   }
 
-  @SuppressLint("SourceLockedOrientationActivity")
+  //@SuppressLint("SourceLockedOrientationActivity")
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    //this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     de.whwk.enjoy.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
     setContentView(binding.getRoot());
     setSupportActionBar(binding.toolbar);

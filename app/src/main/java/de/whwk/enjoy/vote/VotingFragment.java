@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
@@ -32,7 +31,6 @@ import java.util.Map;
 public class VotingFragment extends Fragment {
   private final String TAG = this.getClass().getName();
   private FragmentVotingBinding binding;
-  private JSONObject user;
 
   @Override
   public View onCreateView(
@@ -45,38 +43,11 @@ public class VotingFragment extends Fragment {
 
   public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    if (savedInstanceState == null) {
-      user = ((EnjoyActivity) requireActivity()).getUser();
-      getVotings();
-    }
-  }
-
-  @Override
-  public void onSaveInstanceState(@NonNull Bundle outState) {
-    super.onSaveInstanceState(outState);
-    if (user != null) {
-      outState.putString("user", user.toString());
-    }
-  }
-
-  @Override
-  public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-    super.onViewStateRestored(savedInstanceState);
-    if (savedInstanceState != null) {
-      try {
-        String t = savedInstanceState.getString("user");
-        if (t != null) {
-          user = new JSONObject(t);
-          getVotings();
-        }
-      } catch (JSONException e) {
-        e.printStackTrace();
-      }
-    }
+    getVotings();
   }
 
   private void getVotings() {
-    if (user == null) return;
+    JSONObject user = ((EnjoyActivity) requireActivity()).getUser();
     RequestQueue mRequestQueue = Volley.newRequestQueue(requireActivity().getApplicationContext());
     StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://www.enjoy-gospel.de/wp-json/enjoy/v1/votes/user", response -> {
       try {
@@ -143,7 +114,7 @@ public class VotingFragment extends Fragment {
         Map<String, String> headers = new HashMap<>();
         try {
           headers.put("Content-Type", "application/json; charset=UTF-8");
-          headers.put("Authorization", "Bearer " + user.getString("token"));
+          headers.put("Authorization", "Bearer " + ((EnjoyActivity) requireActivity()).getUser().getString("token"));
           Log.v(TAG, headers.toString());
         } catch (JSONException e) {
           Log.e(TAG, e.toString());
