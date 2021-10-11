@@ -99,6 +99,7 @@ public class EventFragment extends Fragment {
         dataSet.setLabel("");
         PieData pieData = new PieData(dataSet);
         chart.setData(pieData);
+        chart.setDescription(null);
         chart.invalidate();
       } catch (JSONException e) {
         e.printStackTrace();
