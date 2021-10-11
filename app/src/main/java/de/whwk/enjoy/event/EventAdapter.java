@@ -44,7 +44,10 @@ public class EventAdapter extends BaseAdapter {
     }
     EventModel eventModel = map.get(position);
     assert eventModel != null;
-    ((TextView) convertView.findViewById(R.id.voiceLabel)).setText(eventModel.getTitel());
+    ((TextView) convertView.findViewById(R.id.voiceLabel)).setText(eventModel.getVoiceName());
+    ((TextView) convertView.findViewById(R.id.voiceYes)).setText(context.getString(R.string.answerYes,eventModel.getYes()));
+    ((TextView) convertView.findViewById(R.id.voiceNo)).setText(context.getString(R.string.answerNo,eventModel.getNo()));
+    ((TextView) convertView.findViewById(R.id.voiceUndefined)).setText(context.getString(R.string.answerUndef,+eventModel.getUndefined()));
     ProgressBar pb = convertView.findViewById(R.id.voiceStatus);
     pb.setMax(eventModel.getTotal());
     pb.setProgress(eventModel.getYes()+eventModel.getNo());

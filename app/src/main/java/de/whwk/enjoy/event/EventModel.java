@@ -24,7 +24,7 @@ public class EventModel {
     }
   }
 
-  public String getTitel() {
-    return voiceName + " Ja:" + yes + " Nein:" + no + " ?" + (total - yes - no);
+  public int getUndefined() {
+    return total-yes-no;
   }
 }

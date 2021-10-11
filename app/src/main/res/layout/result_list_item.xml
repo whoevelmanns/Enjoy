@@ -1,29 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_height="wrap_content"
-              android:descendantFocusability="blocksDescendants"
-              android:layout_width="match_parent"
-              android:paddingLeft="10dp"
-              android:paddingRight="10dp"
-              android:orientation="vertical">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   android:layout_height="wrap_content"
+                                                   android:descendantFocusability="blocksDescendants"
+                                                   android:layout_width="match_parent"
+                                                   android:id="@+id/linearLayout">
+
   <TextView
           android:id="@+id/voiceLabel"
-          android:layout_width="match_parent"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="Sopran1"
           android:textSize="20sp"
-          android:layout_marginTop="10dp"
-          tools:ignore="HardcodedText"/>
+          tools:ignore="HardcodedText"
+          app:layout_constraintStart_toStartOf="parent"
+          android:layout_marginLeft="20dp"
+          app:layout_constraintBaseline_toBaselineOf="@+id/voiceYes"
+          android:layout_marginStart="20dp"/>
+  <TextView
+          android:id="@+id/voiceYes"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="10"
+          android:textSize="20sp"
+          tools:ignore="HardcodedText"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintBottom_toTopOf="@+id/voiceStatus"
+          android:layout_marginEnd="200dp"
+          android:layout_marginRight="200dp"/>
+  <TextView
+          android:id="@+id/voiceNo"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="11"
+          android:textSize="20sp"
+          tools:ignore="HardcodedText"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintBottom_toTopOf="@+id/voiceStatus"
+          android:layout_marginEnd="125dp"
+          android:layout_marginRight="125dp"/>
+
+  <TextView
+          android:id="@+id/voiceUndefined"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="12"
+          android:textSize="20sp"
+          tools:ignore="HardcodedText"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintBottom_toTopOf="@+id/voiceStatus"
+          android:layout_marginEnd="50dp"
+          android:layout_marginRight="50dp"/>
   <ProgressBar
           android:id="@+id/voiceStatus"
           style="?android:attr/progressBarStyleHorizontal"
-          android:layout_width="match_parent"
-          android:layout_height="0dp"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
           android:progressDrawable="@drawable/status_progress"
-          android:layout_weight="1"
           android:max="5"
           android:progress="5"
           android:secondaryProgress="4"
-  />
-</LinearLayout>
+          app:layout_constraintStart_toStartOf="@+id/voiceLabel"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

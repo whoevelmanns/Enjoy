@@ -17,7 +17,7 @@
   <TextView
           android:id="@+id/eventTitel"
           android:textSize="20sp"
-          android:text="Event"
+          android:text=""
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           app:layout_constraintTop_toTopOf="parent"
@@ -29,7 +29,7 @@
   <TextView
           android:id="@+id/eventDate"
           android:textSize="20sp"
-          android:text="Datum"
+          android:text=""
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginTop="10dp"
@@ -41,5 +41,14 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           app:layout_constraintTop_toBottomOf="@+id/eventDate"
-  android:layout_marginTop="10dp"/>
+          android:layout_marginTop="10dp"/>
+  <com.github.mikephil.charting.charts.PieChart
+          android:id="@+id/chart"
+          android:layout_width="250dp"
+          android:layout_height="250dp"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintHorizontal_bias="0.5"
+          android:layout_marginBottom="32dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

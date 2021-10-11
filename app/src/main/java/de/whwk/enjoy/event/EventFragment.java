@@ -1,5 +1,6 @@
 package de.whwk.enjoy.event;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import de.whwk.enjoy.EnjoyActivity;
 import de.whwk.enjoy.R;
 import de.whwk.enjoy.databinding.FragmentEventBinding;
@@ -20,7 +26,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class EventFragment extends Fragment {
@@ -65,6 +74,33 @@ public class EventFragment extends Fragment {
         EventAdapter adapter = new EventAdapter(requireView().getContext(), map);
         ListView listView = requireView().findViewById(R.id.listview_events);
         listView.setAdapter(adapter);
+        PieChart chart = requireView().findViewById(R.id.chart);
+        List<PieEntry> entries = new ArrayList<>();
+        for (Integer  index : map.keySet()) {
+          EventModel voice = map.get(index);
+          assert voice != null;
+          entries.add(new PieEntry(voice.getYes(),voice.getVoiceName()));
+        }
+        PieDataSet dataSet = new PieDataSet(entries, "Label"); // add entries to dataset
+        //dataSet.setColor(R.color.enjoy_orange);
+        dataSet.addColor(Color.LTGRAY);
+        dataSet.addColor(Color.RED);
+        dataSet.addColor(Color.GREEN);
+        dataSet.addColor(Color.BLUE);
+        dataSet.addColor(Color.YELLOW);
+        dataSet.setValueTextSize(16);
+        dataSet.setValueTextColor(Color.WHITE);
+        dataSet.setValueFormatter(new ValueFormatter() {
+          @Override
+          public String getFormattedValue(float value) {
+            DecimalFormat df= new DecimalFormat("#");
+            return df.format(value);
+          }
+        });
+        dataSet.setLabel("");
+        PieData pieData = new PieData(dataSet);
+        chart.setData(pieData);
+        chart.invalidate();
       } catch (JSONException e) {
         e.printStackTrace();
       }

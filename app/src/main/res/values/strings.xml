@@ -18,4 +18,7 @@
     Homepage dir ein neues generieren. Wenn das erledigt ist, kannst du dich mit der App anmelden.
   </string>
   <string name="lostPasswordBtn">Passwort vergessen</string>
+  <string name="answerYes">+ %1d</string>
+  <string name="answerNo">- %1d</string>
+  <string name="answerUndef">\? %1d</string>
 </resources>
