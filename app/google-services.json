@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "271300403828",
+    "project_id": "enjoy-gospel-1514638219051",
+    "storage_bucket": "enjoy-gospel-1514638219051.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:271300403828:android:c6c6d732f21db3176f2721",
+        "android_client_info": {
+          "package_name": "de.whwk.enjoy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "271300403828-eea23npd44dt2js887cs7bt6g4jue1bn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANhAQ5uGgn1bXK-fzze0xaKUtbpH5_7xs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "271300403828-eea23npd44dt2js887cs7bt6g4jue1bn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
