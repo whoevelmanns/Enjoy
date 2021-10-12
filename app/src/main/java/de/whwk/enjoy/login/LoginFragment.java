@@ -34,6 +34,7 @@ import java.nio.charset.StandardCharsets;
 public class LoginFragment extends Fragment {
   private static final String PASSWORD = "user_password";
   private static final String LOGIN = "user_name";
+  private static final String SAVE_PASSWORD = "save_passwd";
   private final String TAG = this.getClass().getName();
   private FragmentLoginBinding binding;
 
@@ -49,34 +50,30 @@ public class LoginFragment extends Fragment {
     SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(requireContext());
     View p = requireView().getRootView();
     ((EditText) p.findViewById(R.id.user)).setText(settings.getString(LOGIN, ""));
-    if (settings.getBoolean("save_passwd", false)) {
+    if (settings.getBoolean(SAVE_PASSWORD, false)) {
       ((EditText) p.findViewById(R.id.password)).setText(settings.getString(PASSWORD, ""));
-    }else {
+    } else {
       ((EditText) p.findViewById(R.id.password)).setText("");
     }
     binding.buttonOk.setOnClickListener(view1 -> {
       String user = ((EditText) p.findViewById(R.id.user)).getText().toString();
       String password = ((EditText) p.findViewById(R.id.password)).getText().toString();
-      if (!settings.contains("save_passwd")) {
+      if (!settings.contains(SAVE_PASSWORD)) {
         new AlertDialog.Builder(requireContext())
                 .setTitle("Soll das Passwort gespeichert werden?")
                 .setMessage("Das kann in den Einstellungen jederzeit geändert werden")
                 .setPositiveButton("Ja", (dialog, which) -> {
-                  savePassword(settings, password);
+                  savePassword(settings, user, password, true);
                   dialog.dismiss();
                 })
                 .setNegativeButton("Nein", (dialog, which) -> {
-                  resetPassword(settings);
+                  savePassword(settings, user, password, false);
                   dialog.dismiss();
                 })
                 .show();
 
       } else {
-        if (settings.getBoolean("save_passwd", false)) {
-          savePassword(settings, password);
-        } else {
-          resetPassword(settings);
-        }
+        savePassword(settings, user, password, null);
       }
       login(user, password);
     });
@@ -85,7 +82,7 @@ public class LoginFragment extends Fragment {
         Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://enjoy-gospel.de/lostpassword"));
         startActivity(myIntent);
       } catch (ActivityNotFoundException e) {
-        Toast.makeText(requireContext(), "Keine Anwendung gefunden, die auf https://enjoy-gospel.de/lostpassword zugreifen kann",  Toast.LENGTH_LONG).show();
+        Toast.makeText(requireContext(), "Keine Anwendung gefunden, die auf https://enjoy-gospel.de/lostpassword zugreifen kann", Toast.LENGTH_LONG).show();
         e.printStackTrace();
       }
     });
@@ -95,15 +92,19 @@ public class LoginFragment extends Fragment {
     super.onViewCreated(view, savedInstanceState);
   }
 
-  private void resetPassword(SharedPreferences settings) {
+  private void savePassword(SharedPreferences settings, String login, String password, Boolean savePassword) {
     SharedPreferences.Editor editor = settings.edit();
-    editor.remove(PASSWORD);
-    editor.apply();
-  }
-
-  private void savePassword(SharedPreferences settings, String password) {
-    SharedPreferences.Editor editor = settings.edit();
-    editor.putString(PASSWORD, password);
+    editor.putString(LOGIN, login);
+    if (savePassword != null) {
+      editor.putBoolean(SAVE_PASSWORD, savePassword);
+    } else {
+      savePassword = settings.getBoolean(SAVE_PASSWORD, false);
+    }
+    if (savePassword) {
+      editor.putString(PASSWORD, password);
+    } else {
+      editor.remove(PASSWORD);
+    }
     editor.apply();
   }
 
