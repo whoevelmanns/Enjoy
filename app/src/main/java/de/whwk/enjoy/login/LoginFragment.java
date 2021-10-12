@@ -19,6 +19,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.preference.PreferenceManager;
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
@@ -133,7 +134,12 @@ public class LoginFragment extends Fragment {
       } catch (JSONException e) {
         e.printStackTrace();
       }
-    }, error -> Log.e(TAG, error.toString())) {
+    }, error -> {
+      Log.e(TAG, error.toString());
+      if (error instanceof AuthFailureError) {
+        Toast.makeText(requireContext(), "Benutzer oder Passwort falsch", Toast.LENGTH_LONG).show();
+      }
+    }) {
       @Override
       public String getBodyContentType() {
         return "application/json; charset=utf-8";
