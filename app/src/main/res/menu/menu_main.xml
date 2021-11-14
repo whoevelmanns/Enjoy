@@ -1,8 +1,12 @@
 <menu xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto"
       tools:context="de.whwk.enjoy.EnjoyActivity">
-    <item android:id="@+id/action_settings"
-          android:title="@string/action_settings"
+    <item android:id="@+id/action_setlists"
+          android:title="@string/setlist_overview_fragment_label"
           android:orderInCategory="100"
+          app:showAsAction="never"/>
+    <item android:id="@+id/action_settings"
+          android:title="@string/settings_fragment_label"
+          android:orderInCategory="200"
           app:showAsAction="never"/>
 </menu>

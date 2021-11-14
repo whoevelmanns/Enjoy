@@ -30,6 +30,8 @@
             app:destination="@id/SettingsFragment"/>
     <action android:id="@+id/action_VotingFragment_to_EventFragment"
             app:destination="@id/EventFragment"/>
+    <action android:id="@+id/action_VotingFragment_to_setlistsFragment"
+            app:destination="@id/setlistOverviewFragment"/>
   </fragment>
   <fragment
           android:id="@+id/SettingsFragment"
@@ -48,4 +50,14 @@
             android:id="@+id/to_SettingsFragment"
             app:destination="@id/SettingsFragment"/>
   </fragment>
+  <fragment android:id="@+id/setlistOverviewFragment"
+            android:name="de.whwk.enjoy.setlistOverview.SetlistOverviewFragment"
+            android:label="@string/setlist_overview_fragment_label">
+    <action
+            android:id="@+id/to_setlistFragment"
+            app:destination="@id/setlistFragment"/>
+  </fragment>
+  <fragment android:id="@+id/setlistFragment"
+            android:name="de.whwk.enjoy.setlist.SetlistFragment"
+            android:label="@string/setlist_fragment_label"/>
 </navigation>

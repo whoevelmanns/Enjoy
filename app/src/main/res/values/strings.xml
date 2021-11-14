@@ -1,8 +1,9 @@
 <resources>
   <string name="app_name">Enjoy</string>
-  <string name="action_settings">Einstellungen</string>
+  <string name="settings_fragment_label">Einstellungen</string>
   <string name="login_fragment_label">Login</string>
   <string name="voting_fragment_label">Voting</string>
+  <string name="setlist_overview_fragment_label">Setlisten</string>
   <string name="next">Next</string>
   <string name="previous">Previous</string>
   <string name="ok">OK</string>
@@ -13,7 +14,6 @@
   <string name="user_label">Benutzer</string>
   <string name="user_hint">Benutzername</string>
   <string name="passwd_hint">Passwort</string>
-  <string name="settings_fragment_label">Einstellungen</string>
   <string name="lostPassword">Wenn du dein Passwort vergessen hast, kannst du mit dem Passwort vergessen Button auf der
     Homepage dir ein neues generieren. Wenn das erledigt ist, kannst du dich mit der App anmelden.
   </string>
@@ -21,4 +21,5 @@
   <string name="answerYes">+ %1d</string>
   <string name="answerNo">- %1d</string>
   <string name="answerUndef">\? %1d</string>
+  <string name="setlist_fragment_label">Setliste</string>
 </resources>

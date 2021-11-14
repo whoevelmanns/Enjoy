@@ -11,6 +11,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import de.whwk.enjoy.databinding.ActivityMainBinding;
+import de.whwk.enjoy.setlistOverview.SetlistOverviewModel;
 import lombok.Getter;
 import lombok.Setter;
 import org.json.JSONException;
@@ -22,6 +23,8 @@ public class EnjoyActivity extends AppCompatActivity {
   private AppBarConfiguration appBarConfiguration;
   private JSONObject user;
   private int eventId;
+  private SetlistOverviewModel setlist;
+  private boolean autologin=true;
 
   public static String getDate(JSONObject event) {
     try {
@@ -49,7 +52,7 @@ public class EnjoyActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-    de.whwk.enjoy.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+    ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
     setContentView(binding.getRoot());
     setSupportActionBar(binding.toolbar);
     NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
@@ -75,6 +78,11 @@ public class EnjoyActivity extends AppCompatActivity {
     if (id == R.id.action_settings) {
       NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
       navController.navigate(R.id.to_SettingsFragment);
+      return true;
+    }
+    if (id == R.id.action_setlists) {
+      NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+      navController.navigate(R.id.action_VotingFragment_to_setlistsFragment);
       return true;
     }
     return super.onOptionsItemSelected(item);

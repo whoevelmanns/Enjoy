@@ -50,9 +50,15 @@ public class LoginFragment extends Fragment {
     super.onViewStateRestored(savedInstanceState);
     SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(requireContext());
     View p = requireView().getRootView();
-    ((EditText) p.findViewById(R.id.user)).setText(settings.getString(LOGIN, ""));
+    String firstUser = settings.getString(LOGIN, "");
+    String firstPassword=settings.getString(PASSWORD, "");
+    if(((EnjoyActivity) requireActivity()).isAutologin() && settings.getBoolean(SAVE_PASSWORD, false)){
+      login(firstUser,firstPassword);
+      ((EnjoyActivity) requireActivity()).setAutologin(false);
+    }
+    ((EditText) p.findViewById(R.id.user)).setText(firstUser);
     if (settings.getBoolean(SAVE_PASSWORD, false)) {
-      ((EditText) p.findViewById(R.id.password)).setText(settings.getString(PASSWORD, ""));
+      ((EditText) p.findViewById(R.id.password)).setText(firstPassword);
     } else {
       ((EditText) p.findViewById(R.id.password)).setText("");
     }
@@ -138,6 +144,8 @@ public class LoginFragment extends Fragment {
       Log.e(TAG, error.toString());
       if (error instanceof AuthFailureError) {
         Toast.makeText(requireContext(), "Benutzer oder Passwort falsch", Toast.LENGTH_LONG).show();
+      }else{
+        Toast.makeText(requireContext(), "Server nicht erreichbar oder ein anderes technisches Problem liegt vor", Toast.LENGTH_LONG).show();
       }
     }) {
       @Override
